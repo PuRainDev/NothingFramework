@@ -1,0 +1,12 @@
+{
+  "information": {
+    "module_name": "db",
+    "description": "simple json database file storage",
+    "author": "PuRain Studio",
+    "website": "http://purain.ml/",
+    "docs": "http://nothing.purain.ml/view/list#db"
+  },
+  "properties": {
+    "is_accessible": "false"
+  }
+}

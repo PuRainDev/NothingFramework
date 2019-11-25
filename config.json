@@ -1,0 +1,18 @@
+{
+  "general": {
+    "is_public": "true",
+    "default_module": "view",
+    "errors_pass_to": "error_handler",
+    "api_interface": "api"
+  },
+  "information": {
+    "project_name": "NothingDev",
+    "description": "two words about projects",
+    "author": "PuRain Studio",
+    "version": "0.0.1",
+    "lang": "ru/Ru",
+    "sys_ver": "0.0.1",
+    "sys_status": "development",
+    "sys_build": "00001"
+  }
+}

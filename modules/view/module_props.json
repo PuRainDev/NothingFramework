@@ -1,0 +1,13 @@
+{
+  "information": {
+    "module_name": "view",
+    "description": "render HTML pages with TWIG",
+    "author": "PuRain Studio",
+    "website": "http://purain.ml/",
+    "docs": "http://nothing.purain.ml/view/list#view"
+  },
+  "properties": {
+    "is_accessible": "true",
+	"default_page": "index"
+  }
+}

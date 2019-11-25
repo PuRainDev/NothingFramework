@@ -1,0 +1,15 @@
+{
+  "information": {
+    "module_name": "error_handler",
+    "description": "simple errors displaying module",
+    "author": "PuRain Studio",
+    "website": "http://purain.ml/",
+    "docs": "http://nothing.purain.ml/view/list#error_handler"
+  },
+  "properties": {
+    "is_accessible": "false",
+	"log_errors": "true",
+	"min_log_level": "0",
+	"display_type": "html"
+  }
+}

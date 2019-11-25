@@ -1,0 +1,1 @@
+You can read license there: https://creativecommons.org/licenses/by-nc-sa/4.0/

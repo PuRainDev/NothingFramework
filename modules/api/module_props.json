@@ -1,0 +1,12 @@
+{
+  "information": {
+    "module_name": "api",
+    "description": "a simple example of api module",
+    "author": "PuRain Studio",
+    "website": "http://purain.ml/",
+    "docs": "http://nothing.purain.ml/view/list#api"
+  },
+  "properties": {
+    "is_accessible": "true"
+  }
+}

@@ -1,0 +1,11 @@
+# Do not remove this line or mod_rewrite rules and search engine friendly URLs will stop working
+ErrorDocument 404 /view/404
+Options -Indexes
+RewriteEngine on
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^([^/]*)$ /index.php?property_1=$1 [L]
+#RewriteRule ^([^/]*)/([^/]*)$ /index.php?property_1=$1&property_2=$2 [L]
+#RewriteRule ^([^/]*)/([^/]*)/([^/]*)$ /index.php?property_1=$1&property_2=$2&property_3=$3 [L]
+RewriteRule ^(.+)$ index.php/$1 [L]
