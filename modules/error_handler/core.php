@@ -27,14 +27,14 @@ class error_handler extends Module{
 	public static function MainActivity($params) {
 		static::initializing();
 		if (isset($params['0']) && isset($params['1'])  && isset($params['2']) && isset($params['3'])) {
-			if ($module_settings['properties']['log_errors']) {
-				if ($module_settings['properties']['min_log_level'] <= $params['0']) {
+			if (static::$module_settings['properties']['log_errors']) {
+				if (static::$module_settings['properties']['min_log_level'] <= $params['0']) {
 					if (!isset($params['4'])) {
 						Nothing::call_module("system", array("log", "Severity:" . $params['0'], $params['2'] . " (Error code: " . $params['1'] . ") in ". $params['3'] . " module;"));
 					}
 				}
 			}
-			switch ($module_settings['properties']['display_type']) {
+			switch (static::$module_settings['properties']['display_type']) {
 					case 'html':
 					$template = file_get_contents(__DIR__ . '/template.html');
 					$template = str_replace(array("[description]", "[error_code]"), array($params['2'], $params['1']), $template);

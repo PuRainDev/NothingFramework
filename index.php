@@ -15,6 +15,7 @@ require_once 'core/Framework.php';
 $modules = Nothing::get_modules();
 $project_settings = Nothing::get_project_settings();
 $params = Nothing::get_params();
+$aliases = parse_ini_file("aliases.ini", true);
 
 define('ENVIRONMENT', $project_settings['information']['sys_status']);
 
@@ -36,7 +37,7 @@ if (defined('ENVIRONMENT')) {
  * Checks called module and transfers data to it.
  */
 if(isset($params[0]) && $params['0']!='Nothing'){
-	$module_name = $params[0];
+	$module_name = Nothing::alias($params[0]);
 	$params = array_slice($params, 1);
 	if(Nothing::check_module($module_name)) {
 		$module_settings = Nothing::get_module_settings($module_name);
@@ -49,6 +50,6 @@ if(isset($params[0]) && $params['0']!='Nothing'){
 } else {
 	echo Nothing::call_module($project_settings['general']['default_module'], array("Nothing"));
 }
-//start = microtime(true);
-//echo 'Скрипт был выполнен за ' . round(microtime(true) - $start, 6) . ' секунд';
+$start = microtime(true);
+echo 'Скрипт был выполнен за ' . round(microtime(true) - $start, 6) . ' секунд';
 ?>

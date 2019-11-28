@@ -76,5 +76,15 @@ class Nothing_Framework {
 			return false;
 		}
 	}
+	
+	public static function alias($alias) {
+		if (isset($GLOBALS['aliases'][$GLOBALS['project_settings']['information']['sys_status']][$alias])) {
+			return $GLOBALS['aliases'][$GLOBALS['project_settings']['information']['sys_status']][$alias];
+		} else if (isset($GLOBALS['aliases']['GLOBAL'][$alias])){
+			return $GLOBALS['aliases']['GLOBAL'][$alias];
+		} else {
+			return $alias;
+		}
+	}
 }
 ?>
