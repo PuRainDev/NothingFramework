@@ -9,3 +9,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 #RewriteRule ^([^/]*)/([^/]*)$ /index.php?property_1=$1&property_2=$2 [L]
 #RewriteRule ^([^/]*)/([^/]*)/([^/]*)$ /index.php?property_1=$1&property_2=$2&property_3=$3 [L]
 RewriteRule ^(.+)$ index.php/$1 [L]
+<Files config.json>
+Order Allow,Deny
+Deny from all
+Allow from localhost
+Allow from 127.0.0.1
+</Files>
