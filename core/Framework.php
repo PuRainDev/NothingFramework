@@ -78,9 +78,9 @@ class Nothing_Framework {
 	}
 	
 	public static function alias($alias) {
-		if (isset($GLOBALS['aliases'][$GLOBALS['project_settings']['information']['sys_status']][$alias])) {
+		if (isset($GLOBALS['aliases'][$GLOBALS['project_settings']['information']['sys_status']][$alias]) && $GLOBALS['aliases'][$GLOBALS['project_settings']['information']['sys_status']][$alias] != '') {
 			return $GLOBALS['aliases'][$GLOBALS['project_settings']['information']['sys_status']][$alias];
-		} else if (isset($GLOBALS['aliases']['GLOBAL'][$alias])){
+		} else if (isset($GLOBALS['aliases']['GLOBAL'][$alias]) && $GLOBALS['aliases']['GLOBAL'][$alias] != ''){
 			return $GLOBALS['aliases']['GLOBAL'][$alias];
 		} else {
 			return $alias;
