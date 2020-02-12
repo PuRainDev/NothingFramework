@@ -1,6 +1,11 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 0.0.3 - 12.02.2020
+
+### Added
+- DELETE method for db module
+
 ## 0.0.2 - 28.11.2019
 
 ### Added
