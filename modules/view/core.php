@@ -8,7 +8,7 @@ require_once 'vendor/autoload.php';
 /**
  * Displays your pages with TWIG
  *	this module will activate TWIG and pass to it template from 'templates' folder
- *	with data from api module through Nothing::call_module("api", array("get_page_data", PAGE_NAME))
+ *	with data from api module through Nothing::call_module('api', array('get_page_data', PAGE_NAME))
  *	request.
  * 
  * Config:
@@ -37,16 +37,16 @@ class view extends Module{
 					static::write_to_stack($twig->render('error.html', ['code' => $params['1'], 'description' => $params['2']]));
 					break;
 				default:
-					if (file_exists("modules/view/templates/".$params['0'].".html")) {
-						$data = json_decode(Nothing::call_module("api", array("Nothing", "api", "get_page_data", $params['0'])), true);
+					if (file_exists('modules/view/templates/'.$params['0'].'.html')) {
+						$data = json_decode(Nothing::call_module('api', array('Nothing', 'api', 'get_page_data', $params['0'])), true);
 						static::write_to_stack($twig->render($params['0'].'.html', $data));
 					} else {
-						Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("0", "VIEW_Error_Code_404", "The requested page doesn't exist", static::class, false));
+						Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('0', 'VIEW_Error_Code_404', 'The requested page doesn\'t exist', static::class, false));
 					}	
 			}	
 		} else {
-			$data = json_decode(Nothing::call_module("api", array("get_page_data", static::$module_settings['properties']['default_page'])), true);
-			static::write_to_stack($twig->render(static::$module_settings['properties']['default_page'].".html",  $data));
+			$data = json_decode(Nothing::call_module('api', array('get_page_data', static::$module_settings['properties']['default_page'])), true);
+			static::write_to_stack($twig->render(static::$module_settings['properties']['default_page'].'.html',  $data));
 		}
 
 	return static::$stack;

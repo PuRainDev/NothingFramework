@@ -18,10 +18,10 @@ class db extends Module{
 				static::write_to_stack(forward_static_call(array(static::class, $params['0']), $params));
 			}
 			else {
-				Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("0", "DB_Error_Code_400", "Bad request, called undefined method", static::class));
+				Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('0', 'DB_Error_Code_400', 'Bad request, called undefined method', static::class));
 			}
 		} else {
-			Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("0", "API_Error_Code_400", "Bad request, there are missing params", static::class));
+			Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('0', 'API_Error_Code_400', 'Bad request, there are missing params', static::class));
 		}
 
 	return static::$stack;
@@ -43,32 +43,32 @@ class db extends Module{
 	public static function SHOW($params) {
 		switch ($params['1']) {
 				case 'databases':
-					return json_encode(array_slice(scandir(__DIR__ . "/db"), 2));
+					return json_encode(array_slice(scandir(__DIR__ . '/db'), 2));
 					break;
 				case 'database':
-					if (file_exists(__DIR__ . "/db/".$params['2'])) {
-						$file_list = array_slice(scandir(__DIR__ . "/db/".$params['2']), 2);
+					if (file_exists(__DIR__ . '/db/'.$params['2'])) {
+						$file_list = array_slice(scandir(__DIR__ . '/db/'.$params['2']), 2);
 						foreach ($file_list as &$file) {
 							$file = str_replace('.json' ,'' , $file);
 						}
 						return json_encode($file_list);
 					} else {
-							Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("0", "DB_Error_Code_404", "Database ".$params['2']." doesn't exist", static::class));
+							Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('0', 'DB_Error_Code_404', 'Database '.$params['2'].' doesn\'t exist', static::class));
 						}
 					break;
 				case 'table':
-					if (file_exists(__DIR__ . "/db/".$params['2'])) {
-						if (file_exists(__DIR__ . "/db/".$params['2']."/".$params['3'].".json")) {
-							return file_get_contents(__DIR__ . "/db/".$params['2']."/".$params['3'].".json");
+					if (file_exists(__DIR__ . '/db/'.$params['2'])) {
+						if (file_exists(__DIR__ . '/db/'.$params['2'].'/'.$params['3'].'.json')) {
+							return file_get_contents(__DIR__ . '/db/'.$params['2'].'/'.$params['3'].'.json');
 						} else {
-							Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("0", "DB_Error_Code_404", "Table ".$params['3']." doesn't exist", static::class));
+							Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('0', 'DB_Error_Code_404', 'Table '.$params['3'].' doesn\'t exist', static::class));
 						}
 					} else {
-							Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("0", "DB_Error_Code_404", "Database ".$params['2']." doesn't exist", static::class));
+							Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('0', 'DB_Error_Code_404', 'Database '.$params['2'].' doesn\'t exist', static::class));
 						}
 					break;
 				default:
-					Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("0", "DB_Error_Code_400", "The 1 parameter is incorrect or missing in SHOW call", static::class));
+					Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('0', 'DB_Error_Code_400', 'The 1 parameter is incorrect or missing in SHOW call', static::class));
 		}
 	}
 	
@@ -88,28 +88,28 @@ class db extends Module{
 	public static function CREATE($params) {
 		switch ($params['1']) {
 				case 'database':
-					mkdir(__DIR__ . "/db/".$params['2'], 0500);
+					mkdir(__DIR__ . '/db/'.$params['2'], 0500);
 					break;
 				case 'table':
-					if (file_exists(__DIR__ . "/db/".$params['2'])) {
-						if (!file_exists(__DIR__ . "/db/".$params['2']."/".$params['3'].".json")) {
-							file_put_contents(__DIR__ . "/db/".$params['2']."/".$params['3'].".json", '');
-						} else if (isset($params['4']) && $params['4'] == "f") {
-							file_put_contents(__DIR__ . "/db/".$params['2']."/".$params['3'].".json", '');
+					if (file_exists(__DIR__ . '/db/'.$params['2'])) {
+						if (!file_exists(__DIR__ . '/db/'.$params['2'].'/'.$params['3'].'.json')) {
+							file_put_contents(__DIR__ . '/db/'.$params['2'].'/'.$params['3'].'.json', '');
+						} else if (isset($params['4']) && $params['4'] == 'f') {
+							file_put_contents(__DIR__ . '/db/'.$params['2'].'/'.$params['3'].'.json', '');
 						} else {
-							Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("2", "DB_Error_Code_409", "Conflict. There is an attempt to overwrite old data", static::class));
+							Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('2', 'DB_Error_Code_409', 'Conflict. There is an attempt to overwrite old data', static::class));
 						}
 					} else {
-						if (isset($params['4']) && $params['4'] == "f") {
-							mkdir(__DIR__ . "/db/".$params['2'], 0500);
-							file_put_contents(__DIR__ . "/db/".$params['2']."/".$params['3'].".json", '');
+						if (isset($params['4']) && $params['4'] == 'f') {
+							mkdir(__DIR__ . '/db/'.$params['2'], 0500);
+							file_put_contents(__DIR__ . '/db/'.$params['2'].'/'.$params['3'].'.json', '');
 						} else {
-							Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("1", "DB_Error_Code_404", "Database ".$params['2']." doesn't exist", static::class));
+							Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('1', 'DB_Error_Code_404', 'Database '.$params['2'].' doesn\'t exist', static::class));
 						}
 					}
 					break;
 				default:
-					Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("1", "DB_Error_Code_400", "The 1 parameter is incorrect or missing in CREATE call", static::class));
+					Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('1', 'DB_Error_Code_400', 'The 1 parameter is incorrect or missing in CREATE call', static::class));
 			}	
 	}
 /**
@@ -127,13 +127,13 @@ class db extends Module{
 	public static function DROP($params) {
 		switch ($params['1']) {
 				case 'database':
-					rmdir(__DIR__ . "/db/".$params['2']);
+					rmdir(__DIR__ . '/db/'.$params['2']);
 					break;
 				case 'table':
-					unlink(__DIR__ . "/db/".$params['2']."/".$params['3'].".json");
+					unlink(__DIR__ . '/db/'.$params['2'].'/'.$params['3'].'.json');
 					break;
 				default:
-					Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("0", "DB_Error_Code_400", "The 1 parameter is incorrect or missing in DROP call", static::class));
+					Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('0', 'DB_Error_Code_400', 'The 1 parameter is incorrect or missing in DROP call', static::class));
 			}	
 	}
 
@@ -148,36 +148,36 @@ class db extends Module{
  *	Nothing::call_module('db', array('INSERT', 'clients', 'users', 'admin', 'pass', '1f3uhuuq9124'));
  */	
 	public static function INSERT($params) {
-		if (file_exists(__DIR__ . "/db/".$params['1'])) {
-			if (file_exists(__DIR__ . "/db/".$params['1']."/".$params['2'].".json")) {
-				$old = json_decode(file_get_contents(__DIR__ . "/db/".$params['1']."/".$params['2'].".json"), true);
+		if (file_exists(__DIR__ . '/db/'.$params['1'])) {
+			if (file_exists(__DIR__ . '/db/'.$params['1'].'/'.$params['2'].'.json')) {
+				$old = json_decode(file_get_contents(__DIR__ . '/db/'.$params['1'].'/'.$params['2'].'.json'), true);
 				if ($params['3'] != '') {
 					$old = static::array_merge_recursive_distinct($old, array($params['3'] => array($params['4'] => $params['5'])));
 				} else {
 					$old = static::array_merge_recursive_distinct($old, array($params['4'] => $params['5']));
 				}
-				file_put_contents(__DIR__ . "/db/".$params['1']."/".$params['2'].".json", json_encode($old));
+				file_put_contents(__DIR__ . '/db/'.$params['1'].'/'.$params['2'].'.json', json_encode($old));
 			} else {
-				if (isset($params['6']) && $params['6'] == "f") {
+				if (isset($params['6']) && $params['6'] == 'f') {
 					if ($params['3'] != '') {
-						file_put_contents(__DIR__ . "/db/".$params['1']."/".$params['2'].".json", json_encode (array($params['3'] => array($params['4'] => $params['5']))));
+						file_put_contents(__DIR__ . '/db/'.$params['1'].'/'.$params['2'].'.json', json_encode (array($params['3'] => array($params['4'] => $params['5']))));
 					} else {
-						file_put_contents(__DIR__ . "/db/".$params['1']."/".$params['2'].".json", json_encode (array($params['4'] => $params['5'])));
+						file_put_contents(__DIR__ . '/db/'.$params['1'].'/'.$params['2'].'.json', json_encode (array($params['4'] => $params['5'])));
 					}
 				} else {
-					Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("1", "DB_Error_Code_404", "Table ".$params['2']." doesn't exist", static::class));
+					Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('1', 'DB_Error_Code_404', 'Table '.$params['2'].' doesn\'t exist', static::class));
 				}
 			}
 		} else {
-			if (isset($params['6']) && $params['6'] == "f") {
-				mkdir(__DIR__ . "/db/".$params['1'], 0500);
+			if (isset($params['6']) && $params['6'] == 'f') {
+				mkdir(__DIR__ . '/db/'.$params['1'], 0500);
 				if ($params['3'] != '') {
-					file_put_contents(__DIR__ . "/db/".$params['1']."/".$params['2'].".json", json_encode (array($params['3'] => array($params['4'] => $params['5']))));
+					file_put_contents(__DIR__ . '/db/'.$params['1'].'/'.$params['2'].'.json', json_encode (array($params['3'] => array($params['4'] => $params['5']))));
 				} else {
-					file_put_contents(__DIR__ . "/db/".$params['1']."/".$params['2'].".json", json_encode (array($params['4'] => $params['5'])));
+					file_put_contents(__DIR__ . '/db/'.$params['1'].'/'.$params['2'].'.json', json_encode (array($params['4'] => $params['5'])));
 				}
 			} else {
-				Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("1", "DB_Error_Code_404", "Database ".$params['1']." doesn't exist", static::class));
+				Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('1', 'DB_Error_Code_404', 'Database '.$params['1'].' doesn\'t exist', static::class));
 			}
 		}
 	}
@@ -188,7 +188,7 @@ class db extends Module{
  * Usage:
  *	Nothing::call_module('db', array('UPDATE', DB_NAME, TABLE_NAME, SECTOR, KEY, NEW_VALUE, [f]));
  *		If 'f' key specified, it will create database and table, if it doesn`t exists
- *		if SECTOR = "", it will update data in key without sector
+ *		if SECTOR = '', it will update data in key without sector
  *
  * Example:
  *	Nothing::call_module('db', array('UPDATE', 'clients', 'users', 'admin', 'pass', '88h17g7gg711'));
@@ -202,27 +202,27 @@ class db extends Module{
  *
  * Usage:
  *	Nothing::call_module('db', array('SELECT', DB_NAME, TABLE_NAME, SECTOR, KEY));
- *	if SECTOR = "" or SECTOR = "_", it will get data from key without sector
+ *	if SECTOR = '' or SECTOR = '_', it will get data from key without sector
  *
  * Example:
  *	Nothing::call_module('db', array('SELECT', 'clients', 'users', 'admin', 'pass'));
  */		
 	public static function SELECT($params) {
-		if (file_exists(__DIR__ . "/db/".$params['1'])) {
-			if (file_exists(__DIR__ . "/db/".$params['1']."/".$params['2'].".json")) {
-				$db = json_decode(file_get_contents(__DIR__ . "/db/".$params['1']."/".$params['2'].".json"), true);
+		if (file_exists(__DIR__ . '/db/'.$params['1'])) {
+			if (file_exists(__DIR__ . '/db/'.$params['1'].'/'.$params['2'].'.json')) {
+				$db = json_decode(file_get_contents(__DIR__ . '/db/'.$params['1'].'/'.$params['2'].'.json'), true);
 			if (isset($db[$params['4']]) || isset($db[$params['3']][$params['4']])) {
 					if ($params['3'] != '' && $params['3'] != '_') {
 						return json_encode($db[$params['3']][$params['4']]);
 					} else return json_encode($db[$params['4']]);
 				} else {
-					Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("1", "DB_Error_Code_404", "There is no ".$params['4']." in the table ".$params['2'], static::class));
+					Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('1', 'DB_Error_Code_404', 'There is no '.$params['4'].' in the table '.$params['2'], static::class));
 				}
 			} else {
-				Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("1", "DB_Error_Code_404", "Table ".$params['2']." doesn't exist", static::class));
+				Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('1', 'DB_Error_Code_404', 'Table '.$params['2'].' doesn\'t exist', static::class));
 			}
 		} else {
-			Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("1", "DB_Error_Code_404", "Database ".$params['1']." doesn't exist", static::class));
+			Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('1', 'DB_Error_Code_404', 'Database '.$params['1'].' doesn\'t exist', static::class));
 		}
 	}
 /**
@@ -230,28 +230,28 @@ class db extends Module{
  *
  * Usage:
  *	Nothing::call_module('db', array('DELETE', DB_NAME, TABLE_NAME, SECTOR, KEY));
- *		if SECTOR = "", it will delete data in key without sector
+ *		if SECTOR = '', it will delete data in key without sector
  *
  * Example:
  *	Nothing::call_module('db', array('DELETE', 'clients', 'users', 'admin', 'pass'));
  */	
  
 	public static function DELETE($params) {
-		if (file_exists(__DIR__ . "/db/".$params['1'])) {
-			if (file_exists(__DIR__ . "/db/".$params['1']."/".$params['2'].".json")) {
-				$old = json_decode(file_get_contents(__DIR__ . "/db/".$params['1']."/".$params['2'].".json"), true);
+		if (file_exists(__DIR__ . '/db/'.$params['1'])) {
+			if (file_exists(__DIR__ . '/db/'.$params['1'].'/'.$params['2'].'.json')) {
+				$old = json_decode(file_get_contents(__DIR__ . '/db/'.$params['1'].'/'.$params['2'].'.json'), true);
 				if ($params['3'] != '') {
 					unset($old[$params['3']][$params['4']]);
-					file_put_contents(__DIR__ . "/db/".$params['1']."/".$params['2'].".json", json_encode ($old));
+					file_put_contents(__DIR__ . '/db/'.$params['1'].'/'.$params['2'].'.json', json_encode ($old));
 				} else {
 					unset($old[$params['4']]);
-					file_put_contents(__DIR__ . "/db/".$params['1']."/".$params['2'].".json", json_encode ($old));
+					file_put_contents(__DIR__ . '/db/'.$params['1'].'/'.$params['2'].'.json', json_encode ($old));
 				}
 			} else {
-				Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("1", "DB_Error_Code_404", "Table ".$params['2']." doesn't exist", static::class));
+				Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('1', 'DB_Error_Code_404', 'Table '.$params['2'].' doesn\'t exist', static::class));
 			}
 		} else {
-			Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("1", "DB_Error_Code_404", "Database ".$params['1']." doesn't exist", static::class));
+			Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('1', 'DB_Error_Code_404', 'Database '.$params['1'].' doesn\'t exist', static::class));
 		}
 	}
 	

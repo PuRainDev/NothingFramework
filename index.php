@@ -44,12 +44,10 @@ if(isset($params[0]) && $params['0']!='Nothing'){
 		if ($module_settings['properties']['is_accessible'] == "true") {
 			echo Nothing::call_module($module_name, $params);
 		} else {
-			Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("4", "SYS_Error_Code_403", "Forbidden. You don't have permission to access this location", "index"));
+			Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('4', 'SYS_Error_Code_403', 'Forbidden. You don\'t have permission to access this location', 'index'));
 		}
 	}
 } else {
-	echo Nothing::call_module($project_settings['general']['default_module'], array("Nothing"));
+	echo Nothing::call_module($project_settings['general']['default_module'], array('Nothing'));
 }
-$start = microtime(true);
-echo 'Скрипт был выполнен за ' . round(microtime(true) - $start, 6) . ' секунд';
 ?>

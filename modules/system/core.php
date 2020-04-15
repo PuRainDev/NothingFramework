@@ -18,10 +18,10 @@ class system extends Module{
 				static::write_to_stack(forward_static_call(array(static::class, $params['0']), $params));
 			}
 			else {
-					Nothing::call_module("system", array("Nothing", "system", "log", "ERROR", "Called undefined command in system module ".$params['0']));
+					Nothing::call_module('system', array('Nothing', 'system', 'log', 'ERROR', 'Called undefined command in system module '.$params['0']));
 			}
 		} else {
-			Nothing::call_module("system", array("Nothing", "system", "log", "Warning", "Called system module without params: ".$params['0']));
+			Nothing::call_module('system', array('Nothing', 'system', 'log', 'Warning', 'Called system module without params: '.$params['0']));
 		}
 		return static::$stack;
 	}
@@ -33,10 +33,10 @@ class system extends Module{
  *	Nothing::call_module('system', array('log', 'Severety: '. SEVERETY, DESCRIPTION));
  *
  * Example:
- *	Nothing::call_module("system", array("log", "Severity:" . $SEVERETY, $params['2']));
+ *	Nothing::call_module('system', array('log', 'Severity:' . $SEVERETY, $params['2']));
  */
 	public static function log($params) {
-		file_put_contents('modules/system/logs/'.date("Y.m.d").'.txt', date("H:i:s")." - [".$params['1']."] ".$params['2']." (ip: ".$_SERVER['REMOTE_ADDR'].")".PHP_EOL, FILE_APPEND);
+		file_put_contents('modules/system/logs/'.date('Y.m.d').'.txt', date('H:i:s').' - ['.$params['1'].'] '.$params['2'].' (ip: '.$_SERVER['REMOTE_ADDR'].')'.PHP_EOL, FILE_APPEND);
 	}
 
 /**
@@ -46,7 +46,7 @@ class system extends Module{
  *	Nothing::call_module('system', array('clear_logs'));
  */
 	public static function clear_logs($params) {
-		array_map('unlink', glob("modules/system/logs/*.txt"));
+		array_map('unlink', glob('modules/system/logs/*.txt'));
 	}
 }
 ?>

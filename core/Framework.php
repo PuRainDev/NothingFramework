@@ -29,24 +29,24 @@ class Nothing_Framework {
 	public static function call_module($module, $params) {
 		//echo debug_backtrace()[1]['class']." called $module (" . $params['0'] . ") ->";
 		if (self::check_module($module)){
-			include_once "modules/".$module.'/core.php';
+			include_once 'modules/'.$module.'/core.php';
 			return $module::MainActivity($params);
 		} else {
-			echo self::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("0", "SYS_Error_Code_404", "The page you are looking for doesn't exist", static::class, false));
+			echo self::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('0', 'SYS_Error_Code_404', "The page you are looking for doesn't exist", static::class, false));
 		}	
 	}
 	
 	public static function check_module($module) {
 		if (in_array($module, $GLOBALS['modules'])) {
-			if (file_exists("modules/".$module."/module_props.json")) {
+			if (file_exists('modules/'.$module.'/module_props.json')) {
 				return true;
 			} else {
 				self::call_module("system", array("log", "ERROR", "Called module module_props doesn't exist: $modul damaged."));
 				echo self::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("0", "SYS_Error_Code_400", "Bad request, called module doesn't exist", static::class, false));
 			}
 		} else {
-			self::call_module("system", array("log", "ERROR", "Called module doesn't exist: $module"));
-			echo self::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("0", "SYS_Error_Code_400", "Bad request, called module doesn't exist", static::class, false));
+			self::call_module('system', array('log', 'ERROR', 'Called module doesn\'t exist: '.$module));
+			echo self::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('0', 'SYS_Error_Code_400', 'Bad request, called module doesn\'t exist', static::class, false));
 		}
 	}
 	
@@ -55,11 +55,11 @@ class Nothing_Framework {
 	}
 	
 	public static function get_project_settings() {
-		return json_decode(file_get_contents("config.json"), true);
+		return json_decode(file_get_contents('config.json'), true);
 	}
 	
 	public static function get_module_settings($module) {
-		return json_decode(file_get_contents("modules/".$module."/module_props.json"), true);
+		return json_decode(file_get_contents('modules/'.$module.'/module_props.json'), true);
 	}
 	
 	/*

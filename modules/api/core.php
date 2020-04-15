@@ -18,10 +18,10 @@ class api extends Module{
 				static::write_to_stack(forward_static_call(array(static::class, $params['0']), $params));
 			}
 			else {
-				Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("0", "API_Error_Code_400", "Bad request, api method doesn't exist", static::class, false));
+				Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('0', 'API_Error_Code_400', 'Bad request, api method doesn\'t exist', static::class, false));
 			}
 		} else {
-			Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("0", "API_Error_Code_400", "Bad request, there are missing params", static::class, false));
+			Nothing::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('0', 'API_Error_Code_400', 'Bad request, there are missing params', static::class, false));
 		}
 
 	return static::$stack;
@@ -37,7 +37,7 @@ class api extends Module{
  *	Nothing::call_module('api', array('get_page_data', 'index'));
  */
 	public static function get_page_data($params) {
-		$respond = Nothing::call_module("db", array("SHOW", "table", 'pages', $params['1']));
+		$respond = Nothing::call_module('db', array('SHOW', 'table', 'pages', $params['1']));
 		return $respond;
 	}
 }
