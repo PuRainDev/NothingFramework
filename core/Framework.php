@@ -41,8 +41,8 @@ class Nothing_Framework {
 			if (file_exists('modules/'.$module.'/module_props.json')) {
 				return true;
 			} else {
-				self::call_module("system", array("log", "ERROR", "Called module module_props doesn't exist: $modul damaged."));
-				echo self::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array("0", "SYS_Error_Code_400", "Bad request, called module doesn't exist", static::class, false));
+				self::call_module('system', array('log', 'ERROR', 'Called module module_props doesn\'t exist: '.$module.' damaged.'));
+				echo self::call_module($GLOBALS['project_settings']['general']['errors_pass_to'], array('0', 'SYS_Error_Code_400', 'Bad request, called module doesn\'t exist', static::class, false));
 			}
 		} else {
 			self::call_module('system', array('log', 'ERROR', 'Called module doesn\'t exist: '.$module));
